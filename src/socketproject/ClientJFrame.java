@@ -5,6 +5,9 @@
  */
 package socketproject;
 
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  *
  * @author semih
@@ -16,6 +19,10 @@ public class ClientJFrame extends javax.swing.JFrame {
      */
     public ClientJFrame() {
         initComponents();
+        Font messageFont = new Font("Verdana",Font.BOLD,20);
+        allMessageArea.setFont(messageFont);
+        allMessageArea.setForeground(Color.red);
+        
         comm = new Client(ip.getText());
     }
 
@@ -51,6 +58,7 @@ public class ClientJFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("SOPChat-Client");
         setMinimumSize(new java.awt.Dimension(730, 500));
         setPreferredSize(new java.awt.Dimension(730, 500));
 
@@ -113,7 +121,7 @@ public class ClientJFrame extends javax.swing.JFrame {
         jTextArea3.setRows(5);
         jScrollPane3.setViewportView(jTextArea3);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", 0, 0, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(119, 119, 119))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(119, 119, 119))); // NOI18N
 
         jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -193,16 +201,14 @@ public class ClientJFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         comm.connect(Integer.parseInt(port.getText()));
         infoTextArea.setText("Connected to: \n"+comm.getClientSocket().getRemoteSocketAddress());
-        
         comm.recieveMessage();
         comm.setTextArea(allMessageArea);
-        
-        
     }//GEN-LAST:event_connectActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         // TODO add your handling code here:
-        comm.sendMessage(message.getText());
+        comm.sendMessage("Client:"+message.getText());
+        allMessageArea.setText(allMessageArea.getText()+" \n"+ "You: "+message.getText()+"");
         message.setText("");
     }//GEN-LAST:event_sendActionPerformed
 

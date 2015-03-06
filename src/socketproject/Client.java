@@ -18,7 +18,7 @@ import javax.swing.JTextArea;
  * @author semih
  */
 public class Client implements Communication {
-
+    
     private Socket clientSocket;
     private DataOutputStream dataOut;
     private DataInputStream dataIn;

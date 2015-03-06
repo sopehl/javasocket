@@ -12,7 +12,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -33,7 +32,10 @@ public class ServerJForm extends javax.swing.JFrame {
         initComponents();
         server = new Server();
         ipAddress.setText(InetAddress.getLocalHost().getHostAddress());
-
+        
+        Font f = new Font("Verdane", Font.BOLD, 20);    
+        allMessageArea.setFont(f);
+        allMessageArea.setForeground(Color.BLACK);
     }
 
     /**
@@ -68,7 +70,7 @@ public class ServerJForm extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SOPChat");
+        setTitle("SOPChat-Server");
         setMinimumSize(new java.awt.Dimension(700, 500));
 
         jToolBar2.setFloatable(false);
@@ -127,7 +129,7 @@ public class ServerJForm extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(clientsList);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", 0, 0, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(138, 138, 138))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Info", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(138, 138, 138))); // NOI18N
 
         infoArea.setColumns(16);
         infoArea.setRows(5);
@@ -231,25 +233,14 @@ public class ServerJForm extends javax.swing.JFrame {
                 + "Waiting for clients");
         server.connect(Integer.parseInt(port.getText()));
         server.recieveMessage();
-        allMessageArea.setText("" + allMessageArea.getText() + "\n"
-                + server.getRecievedMessage() != null ? server.getRecievedMessage() : "Welcome the SOPChat");
+        
         server.setTextArea(allMessageArea);
     }//GEN-LAST:event_connectActionPerformed
 
     private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
         // TODO add your handling code here:
-        Font f = new Font("Verdane", Font.BOLD, 20);
-        
-        allMessageArea.setFont(f);
-        allMessageArea.setForeground(Color.red);
-        allMessageArea.setText(allMessageArea.getText() + "\n Server: ");
-        
-        allMessageArea.setFont(new Font("Verdane", Font.PLAIN, 20));
-        allMessageArea.setForeground(Color.BLACK);
-        allMessageArea.setText(allMessageArea.getText() + message.getText());
-        
-        server.sendMessage(message.getText());
-        
+        server.sendMessage("Server: "+message.getText());
+        allMessageArea.setText(allMessageArea.getText()+" \n"+ "You: "+message.getText()+"");
         message.setText("");
     }//GEN-LAST:event_sendMessageActionPerformed
 
