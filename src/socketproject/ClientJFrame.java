@@ -208,7 +208,7 @@ public class ClientJFrame extends javax.swing.JFrame {
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         // TODO add your handling code here:
         comm.sendMessage("Client:"+message.getText());
-        allMessageArea.setText(allMessageArea.getText()+" \n"+ "You: "+message.getText()+"");
+        allMessageArea.setText(allMessageArea.getText()+" \n"+ "You: "+message.getText()+" ");
         message.setText("");
     }//GEN-LAST:event_sendActionPerformed
 

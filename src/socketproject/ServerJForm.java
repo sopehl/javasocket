@@ -240,7 +240,7 @@ public class ServerJForm extends javax.swing.JFrame {
     private void sendMessageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendMessageActionPerformed
         // TODO add your handling code here:
         server.sendMessage("Server: "+message.getText());
-        allMessageArea.setText(allMessageArea.getText()+" \n"+ "You: "+message.getText()+"");
+        allMessageArea.setText(""+allMessageArea.getText()+" \n"+ "You: "+message.getText()+"");
         message.setText("");
     }//GEN-LAST:event_sendMessageActionPerformed
 
